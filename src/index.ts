@@ -57,10 +57,16 @@ export async function check_birthdays() {
       const guild = await client.guilds.fetch(birthday.guildId);
       const user = await guild.members.fetch(birthday.userId);
       const channelToSend = await guild.channels.fetch(channelId) as TextChannel;
-  
-      if (channelToSend) {
-        // channelToSend.send(`Happy Birthday ${user.displayName}!`);
-        channelToSend.send({content: `<@${user.id}>`, embeds: [embed]})
+      let roleId = channelToFetch.birthdayRole;
+      if (!roleId) {channelToSend.send({
+        content: `<@${user.id}>`, embeds: [embed]})
+      } else {
+        const role = await guild.roles.fetch(roleId)
+        if(!role) return
+        if (channelToSend) {
+          // channelToSend.send(`Happy Birthday ${user.displayName}!`);
+          channelToSend.send({content: `<@&${role.id}>`, embeds: [embed]})
+        }
       }
     }
   }); 
