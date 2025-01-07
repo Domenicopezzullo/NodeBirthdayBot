@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-
+import { Colors, EmbedBuilder } from 'discord.js'
 import { Client, IntentsBitField, TextChannel } from 'discord.js';
 import { CommandKit } from 'commandkit';
 import { join, dirname } from 'node:path';
@@ -43,6 +43,13 @@ export async function check_birthdays() {
   birthdays.forEach(async (birthday) => {
     const channelToFetch = await ChannelModel.findOne({ guildId: birthday.guildId });
   
+    let embed = new EmbedBuilder()
+      .setTitle("It's someone's birthday today!")
+      .setDescription(`It's ${birthday.userName}'s birthday today!\nWish him a happy birthday!`)
+      .setColor(Colors.Blue)
+      .setImage("https://i.pinimg.com/originals/cc/89/4b/cc894b8ade894d5acd0a4060ec8de4a9.gif")
+
+
     if (channelToFetch) {
       if (!channelToFetch.channelId) return
   
@@ -52,7 +59,8 @@ export async function check_birthdays() {
       const channelToSend = await guild.channels.fetch(channelId) as TextChannel;
   
       if (channelToSend) {
-        channelToSend.send(`Happy Birthday ${user.displayName}!`);
+        // channelToSend.send(`Happy Birthday ${user.displayName}!`);
+        channelToSend.send({content: `<@${user.id}>`, embeds: [embed]})
       }
     }
   }); 
