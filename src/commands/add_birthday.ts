@@ -1,7 +1,7 @@
 import { CommandData, SlashCommandProps, CommandOptions } from "commandkit";
 import { ApplicationCommandOptionType, MessageFlags } from "discord.js";
 import mongoose from 'mongoose'
-import { Birthday, BirthdayModel } from "../schemas/Birthday";
+import { BirthdayModel } from "../schemas/Birthday";
 
 export const data: CommandData = {
     name: 'add_birthday',
@@ -23,6 +23,7 @@ export async function run({ interaction, client, handler }: SlashCommandProps) {
         userId: interaction.user.id
     }, {
         $set: {
+            userName: interaction.user.displayName,
             userId: interaction.user.id,
             birthday: birthday,
             guildId: interaction.guild.id

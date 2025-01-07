@@ -2,7 +2,7 @@
 import {
   Birthday,
   BirthdayModel
-} from "../chunk-K7RAILVO.js";
+} from "../chunk-IOHRENFB.js";
 import "../chunk-4HQ2LG3N.js";
 export {
   Birthday,
