@@ -72,5 +72,7 @@ export async function check_birthdays() {
   }); 
 }
 
+check_birthdays()
+setInterval(check_birthdays, 360000);
 
 client.login(process.env.TOKEN);
