@@ -73,6 +73,6 @@ export async function check_birthdays() {
 }
 
 check_birthdays()
-setInterval(check_birthdays, 360000);
+setInterval(check_birthdays, 3600000);
 
 client.login(process.env.TOKEN);
